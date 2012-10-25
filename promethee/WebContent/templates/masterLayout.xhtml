@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<h:outputStylesheet name="index.css" library="css"/>
+	<title>#</title>
+</h:head>
+<h:body>
+  <div class="header">
+	 <div style="float:left;"><h:graphicImage width='200' height='100' 
+	 		library="images" name="logo.jpg"/>
+	 </div>
+	 <div style="float:left;"><p>Pengadaan Barang PT.KAI</p></div>
+  </div>
+
+  <div id="menu">
+  	<h:form>
+  	<ul id="HDropdown-orange-classic">
+  	    <li><h:commandLink id="kriteria"  action="viewKriteria?faces-redirect=true">Kriteria</h:commandLink></li>
+        <li><h:commandLink id="company"  action="viewRekanan?faces-redirect=true">Rekanan</h:commandLink></li>
+        <li><a href="#" id="kompetensi">Penilaian Kompetensi</a></li>
+        <li><h:commandLink id="pengadaan" action="viewTender?faces-redirect=true">Pengadaan Barang</h:commandLink></li>
+		<li><a href="pool/logout.php" id="logout">Logout</a></li>
+  	</ul>
+  	</h:form>
+  </div>
+  <div id="content">
+  	<h:form>
+  		<ui:insert name="content"/>
+  	</h:form>
+  </div>
+  <div class="footer" align="center">
+  	#
+  </div>
+</h:body>
+
+</html>

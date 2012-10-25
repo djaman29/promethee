@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+		<table>
+			<tr>
+				<td>Kode :</td>
+				<td><h:inputText value="#{kriteria.kode}"/></td>
+			</tr>
+			<tr>
+				<td>Nama :</td>
+				<td><h:inputText value="#{kriteria.nama}" /></td>
+			</tr>
+			<tr>
+				<td>Nilai Min :</td>
+				<td><h:inputText value="#{kriteria.nilaiMin}"/></td>
+			</tr>
+			<tr>
+				<td>Nilai Max :</td>
+				<td><h:inputText value="#{kriteria.nilaiMax}" /></td>
+			</tr>
+			<tr>
+				<td>Bobot :</td>
+				<td><h:inputText value="#{kriteria.bobot}" /></td>	
+			</tr>
+			<tr>
+				<td>Tipe Preferensi :</td>
+				<td>
+					<h:selectOneMenu value="#{kriteria.tipePref}">
+						<f:selectItem itemLabel="1" itemValue="1"/>
+						<f:selectItem itemLabel="2" itemValue="2"/>
+						<f:selectItem itemLabel="3" itemValue="3"/>
+						<f:selectItem itemLabel="4" itemValue="4"/>
+						<f:selectItem itemLabel="5" itemValue="5"/>
+						<f:selectItem itemLabel="6" itemValue="6"/>
+					</h:selectOneMenu>
+				</td>
+			</tr>		
+			<tr>
+				<td>Min/Max :</td>
+				<td>
+					<h:selectOneMenu value="#{kriteria.minmax}">
+						<f:selectItem itemLabel="Min" itemValue="min"/>
+						<f:selectItem itemLabel="Max" itemValue="max"/>
+					</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>P :</td>
+				<td><h:inputText value="#{kriteria.p}"/></td>
+			</tr>
+			<tr>
+				<td>Q :</td>
+				<td><h:inputText value="#{kriteria.q}"/></td>
+			</tr>
+			<tr>
+				<td>G :</td>
+				<td><h:inputText value="#{kriteria.g}"/></td>
+			</tr>		
+		</table>
+		<h:commandButton value="#{msgs.buttonSave}" action="#{kriteria.save}"/>
+		<br/><br/>
+		<h:commandLink value="#{msgs.linkBack}" action="viewKriteria" immediate="true"/>	
+	</ui:define>
+</ui:composition>
+	
+</html>

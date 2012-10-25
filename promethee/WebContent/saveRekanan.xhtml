@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+		<table>
+			<tr>
+				<td>Nama :</td>
+				<td><h:inputText value="#{rekanan.nama}"/></td>
+			</tr>
+			<tr>
+				<td>Jenis :</td>
+				<td>
+					<h:selectOneMenu  value="#{rekanan.jenis}">
+						<f:selectItem itemValue="pt" itemLabel="Persero"/>
+						<f:selectItem itemValue="cv" itemLabel="Commanditer"/>
+					</h:selectOneMenu>
+				</td>
+			</tr>
+			<tr>
+				<td>Alamat :</td>
+				<td><h:inputText value="#{rekanan.alamat}" /></td>
+			</tr>
+			<tr>
+				<td>No.Telp :</td>
+				<td><h:inputText value="#{rekanan.noTelp}"/></td>
+			</tr>
+			<tr>
+				<td>Kota :</td>
+				<td><h:inputText value="#{rekanan.kota}" /></td>
+			</tr>
+			<tr>
+				<td>Kode Pos :</td>
+				<td><h:inputText value="#{rekanan.kodePos}" /></td>	
+			</tr>
+		</table>
+		<h:commandButton value="#{msgs.buttonSave}" action="#{rekanan.save}"/>
+		<br/><br/>
+		<h:commandLink value="#{msgs.linkBack}" action="viewRekanan" immediate="true"/>	
+	</ui:define>
+</ui:composition>
+	
+</html>

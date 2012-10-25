@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+	<h:messages/>
+		<table>
+			<tr>
+				<td>Direktorat :</td>
+				<td><h:inputText value="#{tender.ditPemesanan}"/></td>
+				<td>Pengadaan Barang :</td>
+				<td><h:inputText value="#{tender.pengadaanBarang}"/></td>
+			</tr>
+			<tr>
+				<td>Sumber Dana :</td>
+				<td><h:inputText value="#{tender.sumberDana}"/></td>
+				<td>Tahun :</td>
+				<td><h:inputText value="#{tender.tahun}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>No. SP3 :</td>
+				<td><h:inputText value="#{tender.noSP3}"/></td>
+				<td>Tgl. SP3 :</td>
+				<td><h:inputText value="#{tender.tglSP3}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Tgl. Terima SP3 :</td>
+				<td><h:inputText value="#{tender.tglTerimaSP3}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</td>
+				<td>Uraian Barang :</td>
+				<td><h:inputTextarea value="#{tender.uraianBarang}"/></td>
+			</tr>
+			<tr>
+				<td>No. RBiaya :</td>
+				<td><h:inputText value="#{tender.noRBiaya}"/></td>
+				<td>Tgl. RBiaya  :</td>
+				<td><h:inputText value="#{tender.tglRBiaya}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Volume RBiaya :</td>
+				<td><h:inputText value="#{tender.volRBiaya}"/></td>
+				<td>RUP. RBiaya :</td>
+				<td><h:inputText value="#{tender.rupRBiaya}"/></td>
+			</tr>
+			<tr>
+				<td>No. RKS :</td>
+				<td><h:inputText value="#{tender.noRks}"/></td>
+				<td>Tgl. RKS :</td>
+				<td><h:inputText value="#{tender.tglRks}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td>Progress :</td>
+				<td><h:inputTextarea value="#{tender.progress}"/></td>
+				<td>Nilai OE :</td>
+				<td><h:inputText value="#{tender.nilaiOE}"/></td>
+			</tr>
+			<tr>
+				<td>Nilai Kontrak :</td>
+				<td><h:inputText value="#{tender.nilaiKontrak}"/></td>
+				<td>Saving Cost :</td>
+				<td><h:inputText value="#{tender.savingCost}"/></td>
+			</tr>
+			<tr>
+				<td>Lama Proses :</td>
+				<td><h:inputText value="#{tender.lamaProses}"/></td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		<h:commandButton value="#{msgs.buttonSave}" action="#{tender.save}"/>
+		<br/><br/>
+		<h:commandLink value="#{msgs.linkBack}" action="viewTender" immediate="true"/>	
+	</ui:define>
+</ui:composition>
+	
+</html>

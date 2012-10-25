@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+		<h:panelGrid columns="2">
+			<h:commandButton value="#{msgs.buttonCreate}" action="saveRekanan"/>
+		</h:panelGrid>
+		<h:dataTable value="#{rekanan.listRekanan}"  var="item">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{item.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nama</f:facet>
+				#{item.nama}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Jenis</f:facet>
+				#{item.jenisLabel}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Alamat</f:facet>
+				#{item.alamat}
+			</h:column>
+			<h:column>
+				<f:facet name="header">No.Telp</f:facet>
+				#{item.noTelp}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Kota</f:facet>
+				#{item.kota}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Kode Pos</f:facet>
+				#{item.kodePos}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="#{msgs.linkUpdate}" action="#{rekanan.getOneRekanan(item.id)}"/>
+				<h:outputLabel value=" / "/>
+				<h:commandLink value="#{msgs.linkDelete}" action="#{rekanan.delete(item.id)}"/>
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
+	
+</html>

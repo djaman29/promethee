@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+		<table>
+			<tr>
+				<td colspan="3">
+					<h:commandButton value="#{msgs.buttonCreate}" action="saveTender"/>
+				</td>
+			</tr>
+			<tr>
+				<td>Pencarian:</td>
+				<td><h:inputText value="#{tender.cari}"/></td>
+				<td><h:commandButton value="#{msgs.buttonSearch}" action="#{tender.search}"/></td>
+			</tr>
+		</table>
+		
+		
+		<h:dataTable value="#{tender.listTender}"  var="item">
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				#{item.id}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Direktorat</f:facet>
+				#{item.ditPemesanan}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Pengadaan Barang</f:facet>
+				#{item.pengadaanBarang}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Sumber Dana</f:facet>
+				#{item.sumberDana}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Tahun</f:facet>
+				<h:outputText value="#{item.tahun}">
+					<f:convertDateTime pattern="dd-MM-yyyy"/>
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">No. SP3</f:facet>
+				#{item.noSP3}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Tgl. SP3</f:facet>
+				<h:outputText value="#{item.tglSP3}">
+					<f:convertDateTime pattern="dd-MM-yyyy"/>
+				</h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nilai OE</f:facet>
+				#{item.nilaiOE}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nilai Kontrak</f:facet>
+				#{item.nilaiKontrak}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="#{msgs.linkUpdate}" action="#{tender.getOneTender(item.id)}"/>
+				<h:outputLabel value=" / "/>
+				<h:commandLink value="#{msgs.linkDelete}" action="#{tender.delete(item.id)}"/>
+				<h:outputLabel value=" / "/>
+				<h:commandLink value="#{msgs.linkPenilaian}" action="#{tender.penilaian(item.id)}"/>
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
+	
+</html>
