@@ -19,8 +19,10 @@ public class AlternatifService {
 		try {
 			con = ConnectionService.getConnection();
 			Statement stat = con.createStatement();
-			String query = "select a.id as id,a.kode as kode,a.harga as harga,r.nama as nama from alternatif as a, rekanan as r " +
-					"where a.status_del='N' and a.id_tl='"+ idTL+ "' and a.id_rekanan=r.id";
+			String query = "select a.id as id,a.id_rekanan as id_rekanan,a.kode as kode,a.harga as harga," +
+					"r.nama as nama from alternatif as a, rekanan as r " +
+					"where a.status_del='N' and a.id_tl='"+ idTL+ "' and a.id_rekanan=r.id " +
+					"order by a.kode asc";
 			ResultSet set = stat.executeQuery(query);
 			while (set.next()) {
 				alt = new Alternatif();
@@ -46,7 +48,7 @@ public class AlternatifService {
 			con = ConnectionService.getConnection();
 			Statement stat = con.createStatement();
 			String query = "select max(kode) as kode from alternatif as k where k.id_tl='"+ 
-					idTL +"' status_del='N'";
+					idTL +"' and status_del='N'";
 			ResultSet set = stat.executeQuery(query);
 			if (set.next()) {
 				kode = set.getString("kode");
@@ -62,20 +64,20 @@ public class AlternatifService {
 		
 		try {
 			con = ConnectionService.getConnection();
-			String query1 = "select * from alternatif as k where k.id_tl=? and k.id_rekanan=? and status_del='N'";
-			PreparedStatement stat = (PreparedStatement) con.prepareStatement(query1);
-			stat.setInt(1, k.getIdTL());
-			stat.setInt(2, k.getIdRekanan());			
-			ResultSet set = stat.executeQuery(query1);
+			String query1 = "select * from alternatif as k where k.id_tl='"+ k.getIdTL()
+					+"' and k.id_rekanan='"+k.getIdRekanan()+"' and status_del='N'";
+			Statement stat1 = con.createStatement();			
+			ResultSet set = stat1.executeQuery(query1);
 			if (!set.next()) {
-				String query2 = "insert into alternatif values(?,?,?,?,?)";
-				stat = (PreparedStatement) con.prepareStatement(query2);
-				stat.setInt(1, 0);
-				stat.setString(2, k.getKode());
-				stat.setInt(3, k.getIdTL());
-				stat.setInt(4, k.getIdRekanan());
-				stat.setInt(5,  k.getHarga());
-				stat.execute();
+				String query2 = "insert into alternatif values(?,?,?,?,?,?)";
+				PreparedStatement stat2 = (PreparedStatement) con.prepareStatement(query2);
+				stat2.setInt(1, 0);
+				stat2.setString(2, k.getKode());
+				stat2.setInt(3, k.getIdTL());
+				stat2.setInt(4, k.getIdRekanan());
+				stat2.setInt(5,  k.getHarga());
+				stat2.setString(6, new Character(k.getStatusDel()).toString());
+				stat2.execute();
 			}			
 		} finally {
 			if (con!=null) con.close();

@@ -7,7 +7,7 @@ public class TenderLelang {
 	private String ditPemesanan;
 	private String pengadaanBarang;
 	private String sumberDana;
-	private Date tahun;
+	private String tahun;
 	private Integer no;
 	private String noSP3;
 	private Date tglSP3;
@@ -50,10 +50,10 @@ public class TenderLelang {
 	public void setSumberDana(String sumberDana) {
 		this.sumberDana = sumberDana;
 	}
-	public Date getTahun() {
+	public String getTahun() {
 		return tahun;
 	}
-	public void setTahun(Date tahun) {
+	public void setTahun(String tahun) {
 		this.tahun = tahun;
 	}
 	public Integer getNo() {
