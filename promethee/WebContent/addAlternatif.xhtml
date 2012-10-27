@@ -11,8 +11,8 @@
 		<h:panelGrid columns="2">
 			Rekanan:
 			<h:selectOneMenu value="#{alt.idRekanan}">
-				<f:selectItems value="#{rekanan.listRekanan}" var="item"
-						itemLabel="#{item.nama}" itemValue="#{item.id}"/>
+				<f:selectItems value="#{rekanan.listRekanan}" var="item1"
+						itemLabel="#{item1.nama}" itemValue="#{item1.id}"/>
 			</h:selectOneMenu>
 			
 			Harga :
@@ -35,7 +35,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
-				<h:commandLink value="#{msgs.linkUpdate}" action="#{alt.getOneAlternatif(item.id)}"/>
+				<h:commandLink value="#{msgs.linkUpdate}" action="#{alt.getOneAlt(item.id)}"/>
 				<h:outputLabel value=" / "/>
 				<h:commandLink value="#{msgs.linkDelete}" action="#{alt.delete(item.id)}"/>
 			</h:column>

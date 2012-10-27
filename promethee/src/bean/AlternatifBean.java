@@ -49,7 +49,7 @@ public class AlternatifBean implements Serializable{
 		return listAlternatif;
 	}
 	
-	public String getOneAlternatif(Integer idValue) {
+	public String getOneAlt(int idValue) {
 		Alternatif k = null;
 		status = true;
 		
