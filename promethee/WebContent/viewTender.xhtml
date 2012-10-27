@@ -22,7 +22,7 @@
 		</table>
 		
 		
-		<h:dataTable value="#{tender.listTender}"  var="item">
+		<h:dataTable value="#{tender.listTender}" var="item">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
 				#{item.id}
@@ -41,9 +41,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Tahun</f:facet>
-				<h:outputText value="#{item.tahun}">
-					<f:convertDateTime pattern="dd-MM-yyyy"/>
-				</h:outputText>
+				#{item.tahun}
 			</h:column>
 			<h:column>
 				<f:facet name="header">No. SP3</f:facet>
@@ -65,11 +63,13 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
-				<h:commandLink value="#{msgs.linkUpdate}" action="#{tender.getOneTender(item.id)}"/>
-				<h:outputLabel value=" / "/>
-				<h:commandLink value="#{msgs.linkDelete}" action="#{tender.delete(item.id)}"/>
+				<h:commandLink value="#{msgs.linkRekanan}" action="#{alt.toAddAlternatif(item.id)}"/>
 				<h:outputLabel value=" / "/>
 				<h:commandLink value="#{msgs.linkPenilaian}" action="#{tender.penilaian(item.id)}"/>
+				<h:outputLabel value=" / "/>
+				<h:commandLink value="#{msgs.linkUpdate}" action="#{tender.getOneTender(item.id)}"/>
+				<h:outputLabel value=" / "/>
+				<h:commandLink value="#{msgs.linkDelete}" action="#{tender.delete(item.id)}"/>				
 			</h:column>
 		</h:dataTable>
 	</ui:define>

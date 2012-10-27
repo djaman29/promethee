@@ -20,10 +20,7 @@
 				<td>Sumber Dana :</td>
 				<td><h:inputText value="#{tender.sumberDana}"/></td>
 				<td>Tahun :</td>
-				<td><h:inputText value="#{tender.tahun}">
-						<f:convertDateTime pattern="dd-MM-yyyy"/>
-					</h:inputText>
-				</td>
+				<td><h:inputText value="#{tender.tahun}"/></td>
 			</tr>
 			<tr>
 				<td>No. SP3 :</td>
@@ -86,7 +83,7 @@
 				<td>&nbsp;</td>
 			</tr>
 		</table>
-		<h:commandButton value="#{msgs.buttonSave}" action="#{tender.save}"/>
+		<h:commandButton value="#{msgs.buttonSave}" action="#{tender.save}" />
 		<br/><br/>
 		<h:commandLink value="#{msgs.linkBack}" action="viewTender" immediate="true"/>	
 	</ui:define>
