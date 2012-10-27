@@ -1,16 +1,22 @@
 package bean;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 import model.Alternatif;
 import service.AlternatifService;
 
-public class AlternatifBean {
+@ManagedBean(name="alt")
+@RequestScoped
+public class AlternatifBean implements Serializable{
 	private Integer id;
 	private String kode;
-	private Integer idTL;
+	private int idTL;
 	private Integer idRekanan;
 	private Integer harga;
 	private String namaRekanan;
@@ -18,16 +24,20 @@ public class AlternatifBean {
 	private AlternatifService service;
 	private boolean status;
 	
-	
 	public AlternatifBean() {
 		service = new AlternatifService();
 	}
 
-	public List<Alternatif> getListAlternatif(Integer idValue) {
+	public String toAddAlternatif(Integer value) {
+		idTL = value;
+		return "addAlternatif";
+	}
+	
+	public List<Alternatif> getListAlternatif() {
 		List<Alternatif> listAlternatif = new ArrayList<Alternatif>();
 		
 		try {
-			listAlternatif = service.getManyData(idValue);
+			listAlternatif = service.getManyData(idTL);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,8 +78,9 @@ public class AlternatifBean {
 		status = true;
 		try {
 			String lastKode = service.getLastKode(idValue);
+			if (lastKode == null) lastKode="";
 			String newKode = "A1";
-			if (lastKode.isEmpty()) {
+			if (!lastKode.isEmpty()) {
 				int newNumberKode = Integer.valueOf(lastKode.substring(1))+1;
 				newKode= "A"+ newNumberKode;
 			}			
@@ -85,10 +96,10 @@ public class AlternatifBean {
 		}
 	}
 	
-	public String save(Integer idValue) {	
+	public String save() {	
 		status=true;
 		try {
-			generateKode(idValue);
+			generateKode(idTL);
 			Alternatif k = new Alternatif();
 			k.setKode(this.getKode());
 			k.setHarga(this.getHarga());
@@ -105,10 +116,11 @@ public class AlternatifBean {
 			e.printStackTrace();
 		}
 		
-		if (status)
-			return "addAlternatif?faces-redirect=true";
-		else
-			return null;
+//		if (status)
+//			return "addAlternatif?id="+ idTL;
+//		else
+		harga = 0;
+		return null;
 	}
 	
 	public String update() {	
@@ -164,10 +176,10 @@ public class AlternatifBean {
 	public void setKode(String kode) {
 		this.kode = kode;
 	}
-	public Integer getIdTL() {
+	public int getIdTL() {
 		return idTL;
 	}
-	public void setIdTL(Integer idTL) {
+	public void setIdTL(int idTL) {
 		this.idTL = idTL;
 	}
 	public Integer getIdRekanan() {

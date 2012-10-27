@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.html.HtmlOutcomeTargetLink;
+import javax.faces.event.ActionEvent;
 
 import model.TenderLelang;
 import service.TenderLelangService;
@@ -20,7 +22,7 @@ public class TenderLelangBean implements Serializable {
 	private String ditPemesanan;
 	private String pengadaanBarang;
 	private String sumberDana;
-	private Date tahun;
+	private String tahun;
 	private Integer no;
 	private String noSP3;
 	private Date tglSP3;
@@ -41,9 +43,12 @@ public class TenderLelangBean implements Serializable {
 	
 	private Integer idHidden;
 	private String cari;
+	private List<TenderLelang> listTenderLelang;
+	private boolean onSearch = false;
 	
 	private TenderLelangService service;
 	private boolean status;
+	
 	
 	
 	public TenderLelangBean() {
@@ -51,18 +56,20 @@ public class TenderLelangBean implements Serializable {
 	}
 
 	public List<TenderLelang> getListTender() {
-		List<TenderLelang> listTenderLelang = new ArrayList<TenderLelang>();
-		
-		try {
-			listTenderLelang = service.getAllData();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (!onSearch) {
+			listTenderLelang = new ArrayList<TenderLelang>();
+			
+			try {
+				listTenderLelang = service.getAllData();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+		status = false;
 		return listTenderLelang;
 	}
 	
@@ -143,7 +150,7 @@ public class TenderLelangBean implements Serializable {
 			status=false;
 			e.printStackTrace();
 		}
-		
+				
 		if (status)
 			return "viewTender?faces-redirect=true";
 		else
@@ -211,6 +218,18 @@ public class TenderLelangBean implements Serializable {
 	}
 	
 	public String search() {
+		onSearch = true;
+		listTenderLelang = new ArrayList<TenderLelang>();
+		
+		try {
+			listTenderLelang = service.getManyData(cari);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	
@@ -239,10 +258,10 @@ public class TenderLelangBean implements Serializable {
 	public void setSumberDana(String sumberDana) {
 		this.sumberDana = sumberDana;
 	}
-	public Date getTahun() {
+	public String getTahun() {
 		return tahun;
 	}
-	public void setTahun(Date tahun) {
+	public void setTahun(String tahun) {
 		this.tahun = tahun;
 	}
 	public Integer getNo() {

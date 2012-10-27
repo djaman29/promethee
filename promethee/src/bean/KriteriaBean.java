@@ -95,6 +95,7 @@ public class KriteriaBean implements Serializable {
 		status = true;
 		try {
 			String lastKode = service.getLastKode();
+			if (lastKode == null) lastKode="";
 			String newKode = "K01";
 			if (!lastKode.isEmpty()) {
 				int newNumberKode = Integer.valueOf(lastKode.substring(1))+1;
