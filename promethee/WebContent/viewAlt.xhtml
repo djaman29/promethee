@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/templates/masterLayout.xhtml">
+	<ui:define name="content">
+		<h:commandButton value="#{msgs.buttonCreate}" action="saveAlt"/>
+		<h:dataTable value="#{alternatif.listAlternatif}" var="item">
+			<h:column>
+				<f:facet name="header">Kode</f:facet>
+				#{item.kode}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Rekanan</f:facet>
+				#{item.namaRekanan}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Harga</f:facet>
+				#{item.harga}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="#{msgs.linkDelete}" action="#{alternatif.delete(item.id)}"/>
+			</h:column>
+		</h:dataTable>
+		<br/><br/>
+		<h:commandLink value="#{msgs.linkBack}" action="viewTender" immediate="true"/>
+	</ui:define>
+</ui:composition>
+	
+</html>
