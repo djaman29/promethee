@@ -4,10 +4,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 		xmlns:ui="http://java.sun.com/jsf/facelets"
 		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:f="http://java.sun.com/jsf/core">
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:corejsf="http://corejsf.com">
 
 <ui:composition template="/templates/masterLayout.xhtml">
 	<ui:define name="content">
+	 <h:outputStylesheet library="css" name="styles.css"/> 
 		<table>
 			<tr>
 				<td colspan="3">
@@ -22,7 +24,7 @@
 		</table>
 		
 		
-		<h:dataTable value="#{tender.listTender}" var="item">
+		<h:dataTable id="tender" value="#{tender.listTender}" var="item" rows="5">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
 				#{item.id}
@@ -63,7 +65,7 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
-				<h:commandLink value="#{msgs.linkRekanan}" action="#{alt.toAddAlternatif(item.id)}"/>
+				<h:commandLink value="#{msgs.linkRekanan}" action="#{alternatif.toViewAlt(item.id)}"/>
 				<h:outputLabel value=" / "/>
 				<h:commandLink value="#{msgs.linkPenilaian}" action="#{tender.penilaian(item.id)}"/>
 				<h:outputLabel value=" / "/>
@@ -72,6 +74,8 @@
 				<h:commandLink value="#{msgs.linkDelete}" action="#{tender.delete(item.id)}"/>				
 			</h:column>
 		</h:dataTable>
+		<!--  <corejsf:pager dataTableId="tender" showpages="20"
+                        selectedStyleClass="currentPage"/> -->
 	</ui:define>
 </ui:composition>
 	

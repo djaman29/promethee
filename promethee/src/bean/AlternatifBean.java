@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import model.Alternatif;
 import service.AlternatifService;
 
-@ManagedBean(name="alt")
-@RequestScoped
+@ManagedBean(name="alternatif")
+@SessionScoped
 public class AlternatifBean implements Serializable{
 	private Integer id;
 	private String kode;
@@ -28,9 +28,9 @@ public class AlternatifBean implements Serializable{
 		service = new AlternatifService();
 	}
 
-	public String toAddAlternatif(Integer value) {
+	public String toViewAlt(int value) {
 		idTL = value;
-		return "addAlternatif";
+		return "viewAlt";
 	}
 	
 	public List<Alternatif> getListAlternatif() {
@@ -49,30 +49,30 @@ public class AlternatifBean implements Serializable{
 		return listAlternatif;
 	}
 	
-	public String getOneAlt(int idValue) {
-		Alternatif k = null;
-		status = true;
-		
-		try {
-			k = service.getOneData(idValue);
-			this.setId(k.getId());
-			this.setKode(k.getKode());
-			this.setNamaRekanan(k.getNamaRekanan());
-			this.setHarga(k.getHarga());
-			
-		} catch (ClassNotFoundException e) {
-			status = false;
-			e.printStackTrace();
-		} catch (SQLException e) {
-			status = false;
-			e.printStackTrace();
-		}
-		
-		if (status)
-			return "updateAlternatif";
-		else
-			return null;
-	}
+//	public String getOneAlt(int idValue) {
+//		Alternatif k = null;
+//		status = true;
+//		
+//		try {
+//			k = service.getOneData(idValue);
+//			this.setId(k.getId());
+//			this.setKode(k.getKode());
+//			this.setNamaRekanan(k.getNamaRekanan());
+//			this.setHarga(k.getHarga());
+//			
+//		} catch (ClassNotFoundException e) {
+//			status = false;
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			status = false;
+//			e.printStackTrace();
+//		}
+//		
+//		if (status)
+//			return "updateAlternatif";
+//		else
+//			return null;
+//	}
 	
 	public void generateKode(Integer idValue) throws NumberFormatException {
 		status = true;
@@ -116,36 +116,36 @@ public class AlternatifBean implements Serializable{
 			e.printStackTrace();
 		}
 		
-//		if (status)
-//			return "addAlternatif?id="+ idTL;
-//		else
 		harga = 0;
-		return null;
-	}
-	
-	public String update() {	
-		status=true;
-		try {
-			Alternatif k = new Alternatif();
-			k.setId(this.getId());
-			k.setHarga(this.getHarga());
-			
-			service.update(k);
-		} catch (ClassNotFoundException e) {
-			status=false;
-			e.printStackTrace();
-		} catch (SQLException e) {
-			status=false;
-			e.printStackTrace();
-		}		
-		
 		if (status)
-			return "addAlternatif?faces-redirect=true";
+			return "viewAlt";
 		else
 			return null;
 	}
 	
-	public String delete(Integer idValue) {	
+//	public String update() {	
+//		status=true;
+//		try {
+//			Alternatif k = new Alternatif();
+//			k.setId(this.getId());
+//			k.setHarga(this.getHarga());
+//			
+//			service.update(k);
+//		} catch (ClassNotFoundException e) {
+//			status=false;
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			status=false;
+//			e.printStackTrace();
+//		}		
+//		
+//		if (status)
+//			return "addAlternatif?faces-redirect=true";
+//		else
+//			return null;
+//	}
+	
+	public String delete(int idValue) {	
 		status=true;
 		try {			
 			service.delete(idValue);
@@ -157,9 +157,9 @@ public class AlternatifBean implements Serializable{
 			e.printStackTrace();
 		}		
 		
-		if (status)
-			return "addAlternatif?faces-redirect=true";
-		else
+//		if (status)
+//			return "addAlternatif?faces-redirect=true";
+//		else
 			return null;
 	}
 	

@@ -113,7 +113,7 @@ public class AlternatifService {
 		}
 	}
 	
-	public Alternatif getOneData(Integer id) throws ClassNotFoundException, SQLException {
+	public Alternatif getOneData(int id) throws ClassNotFoundException, SQLException {
 		Alternatif alt = null;
 		Connection con = null;
 		
