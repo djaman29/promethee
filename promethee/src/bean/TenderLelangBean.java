@@ -7,13 +7,13 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import model.TenderLelang;
 import service.TenderLelangService;
 
 @ManagedBean(name="tender")
-@RequestScoped
+@SessionScoped
 public class TenderLelangBean implements Serializable {
 	
 	private Integer id;
@@ -42,38 +42,58 @@ public class TenderLelangBean implements Serializable {
 	private Integer idHidden;
 	private String cari;
 	private List<TenderLelang> listTenderLelang;
-	
-	private TenderLelangService service;
-	private boolean status;
-	private boolean onCari;
 		
 	public TenderLelangBean() {
-		service = new TenderLelangService();
+		getAllData();
 	}
 
+	private void getAllData() {
+		TenderLelangService service = new TenderLelangService();
+		try {
+			listTenderLelang = service.getAllData();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		service = null;
+	}
+	
+	private void clear() {
+		  id = 0;
+		  ditPemesanan = "";
+		  pengadaanBarang = "";
+		  sumberDana = "";
+		  tahun = "";
+		  no = 0;
+		  noSP3 = "";
+		  tglSP3 = null;
+		  tglTerimaSP3 = null;
+		  uraianBarang = "";
+		  noRBiaya = "";
+		  tglRBiaya = null;
+		  volRBiaya = "";
+		  rupRBiaya = null;
+		  noRks = "";
+		  tglRks = null;
+		  progress = "";
+		  nilaiOE = null;
+		  nilaiKontrak = null;
+		  savingCost = null;
+		  lamaProses = null;
+		  statusDel=' ';
+		  idHidden=null;
+	}
+	
 	public List<TenderLelang> getListTender() {
-		if (!onCari) {
-			try {
-				listTenderLelang = service.getAllData();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("oncari = false");
-		}
-		else {
-			System.out.println("oncari = true");
-		}
 		return listTenderLelang;
 	}
 	
 	public String getOneTender(Integer id) {
 		TenderLelang k = null;
-		status = true;
-		
+		TenderLelangService service = new TenderLelangService();
 		try {
 			k = service.getOneData(id);
 			this.setId(id);
@@ -99,21 +119,17 @@ public class TenderLelangBean implements Serializable {
 			this.setSavingCost(k.getSavingCost());
 			this.setLamaProses(k.getLamaProses());
 		} catch (ClassNotFoundException e) {
-			status = false;
 			e.printStackTrace();
 		} catch (SQLException e) {
-			status = false;
 			e.printStackTrace();
 		}
 		
-		if (status)
-			return "updateTender";
-		else
-			return null;
+		service = null;
+		return "updateTender";
 	}
 	
 	public String save() {	
-		status=true;
+		TenderLelangService service = new TenderLelangService();
 		try {
 			TenderLelang k = new TenderLelang();
 			
@@ -140,22 +156,20 @@ public class TenderLelangBean implements Serializable {
 			k.setStatusDel('N');
 			
 			service.save(k);
+			getAllData();
+			clear();
 		} catch (ClassNotFoundException e) {
-			status=false;
 			e.printStackTrace();
 		} catch (SQLException e) {
-			status=false;
 			e.printStackTrace();
 		}
-				
-		if (status)
-			return "viewTender?faces-redirect=true";
-		else
-			return null;
+		
+		service = null;
+		return "viewTender";
 	}
 	
-	public String update() {	
-		status=true;
+	public String update() {
+		TenderLelangService service = new TenderLelangService();
 		try {
 			TenderLelang k = new TenderLelang();
 			
@@ -182,41 +196,36 @@ public class TenderLelangBean implements Serializable {
 			k.setLamaProses(this.getLamaProses());
 			
 			service.update(k);
+			getAllData();
+			clear();
 		} catch (ClassNotFoundException e) {
-			status=false;
 			e.printStackTrace();
 		} catch (SQLException e) {
-			status=false;
 			e.printStackTrace();
 		}		
 		
-		if (status)
-			return "viewTender?faces-redirect=true";
-		else
-			return null;
+		service = null;
+		return "viewTender";
 	}
 	
-	public String delete(Integer id) {	
-		status=true;
+	public String delete(Integer id) {
+		TenderLelangService service = new TenderLelangService();
 		try {			
 			service.delete(id);
+			getAllData();
 		} catch (ClassNotFoundException e) {
-			status=false;
 			e.printStackTrace();
 		} catch (SQLException e) {
-			status=false;
 			e.printStackTrace();
 		}		
 		
-		if (status)
-			return "viewTender?faces-redirect=true";
-		else
-			return null;
+		service = null;
+		return null;
 	}
 	
 	public String search() {
-		onCari = true;
 		listTenderLelang = new ArrayList<TenderLelang>();
+		TenderLelangService service = new TenderLelangService();
 		try {
 			listTenderLelang = service.getManyData(cari);
 		} catch (ClassNotFoundException e) {
@@ -226,7 +235,7 @@ public class TenderLelangBean implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		service = null;
 		return null;
 	}
 	
