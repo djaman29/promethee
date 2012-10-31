@@ -21,11 +21,11 @@ public class AlternatifBean implements Serializable{
 	private Integer harga;
 	private String namaRekanan;
 	
-	private AlternatifService service;
+	//private AlternatifService service;
 	private boolean status;
 	
 	public AlternatifBean() {
-		service = new AlternatifService();
+		//service = new AlternatifService();
 	}
 
 	public String toViewAlt(int value) {
@@ -35,6 +35,7 @@ public class AlternatifBean implements Serializable{
 	
 	public List<Alternatif> getListAlternatif() {
 		List<Alternatif> listAlternatif = new ArrayList<Alternatif>();
+		AlternatifService service = new AlternatifService();
 		
 		try {
 			listAlternatif = service.getManyData(idTL);
@@ -46,6 +47,7 @@ public class AlternatifBean implements Serializable{
 			e.printStackTrace();
 		}
 		
+		service = null;
 		return listAlternatif;
 	}
 	
@@ -76,6 +78,7 @@ public class AlternatifBean implements Serializable{
 	
 	public void generateKode(Integer idValue) throws NumberFormatException {
 		status = true;
+		AlternatifService service = new AlternatifService();
 		try {
 			String lastKode = service.getLastKode(idValue);
 			if (lastKode == null) lastKode="";
@@ -94,10 +97,13 @@ public class AlternatifBean implements Serializable{
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException();
 		}
+		
+		service = null;
 	}
 	
 	public String save() {	
 		status=true;
+		AlternatifService service = new AlternatifService();
 		try {
 			generateKode(idTL);
 			Alternatif k = new Alternatif();
@@ -116,6 +122,7 @@ public class AlternatifBean implements Serializable{
 			e.printStackTrace();
 		}
 		
+		service = null;
 		harga = 0;
 		if (status)
 			return "viewAlt";
@@ -147,6 +154,7 @@ public class AlternatifBean implements Serializable{
 	
 	public String delete(int idValue) {	
 		status=true;
+		AlternatifService service = new AlternatifService();
 		try {			
 			service.delete(idValue);
 		} catch (ClassNotFoundException e) {
@@ -156,7 +164,7 @@ public class AlternatifBean implements Serializable{
 			status=false;
 			e.printStackTrace();
 		}		
-		
+		service = null;
 //		if (status)
 //			return "addAlternatif?faces-redirect=true";
 //		else

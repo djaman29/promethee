@@ -18,11 +18,10 @@
 			</tr>
 			<tr>
 				<td>Pencarian:</td>
-				<td><h:inputText value="#{tender.cari}"/></td>
-				<td><h:commandButton value="#{msgs.buttonSearch}" action="#{tender.search}"/></td>
+				<td><h:inputText value="#{tender.cari}" immediate="true"/></td>
+				<td><h:commandButton value="#{msgs.buttonSearch}" action="#{tender.search}"/> </td>
 			</tr>
-		</table>
-		
+		</table>		
 		
 		<h:dataTable id="tender" value="#{tender.listTender}" var="item" rows="5">
 			<h:column>
@@ -74,9 +73,9 @@
 				<h:commandLink value="#{msgs.linkDelete}" action="#{tender.delete(item.id)}"/>				
 			</h:column>
 		</h:dataTable>
-		<!--  <corejsf:pager dataTableId="tender" showpages="20"
-                        selectedStyleClass="currentPage"/> -->
-	</ui:define>
+		<corejsf:pager dataTableId="tender" showpages="20"
+                        selectedStyleClass="currentPage"/>
+		</ui:define>
 </ui:composition>
 	
 </html>

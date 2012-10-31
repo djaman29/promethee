@@ -1,6 +1,8 @@
 package model;
 
-public class Alternatif {
+import java.io.Serializable;
+
+public class Alternatif implements Serializable {
 	private Integer id;
 	private String kode;
 	private Integer idTL;

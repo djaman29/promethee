@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TenderLelang {
+public class TenderLelang implements Serializable {
 	private Integer id;
 	private String ditPemesanan;
 	private String pengadaanBarang;

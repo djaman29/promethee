@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.html.HtmlOutcomeTargetLink;
-import javax.faces.event.ActionEvent;
 
 import model.TenderLelang;
 import service.TenderLelangService;
@@ -44,21 +42,17 @@ public class TenderLelangBean implements Serializable {
 	private Integer idHidden;
 	private String cari;
 	private List<TenderLelang> listTenderLelang;
-	private boolean onSearch = false;
 	
 	private TenderLelangService service;
 	private boolean status;
-	
-	
-	
+	private boolean onCari;
+		
 	public TenderLelangBean() {
 		service = new TenderLelangService();
 	}
 
 	public List<TenderLelang> getListTender() {
-		if (!onSearch) {
-			listTenderLelang = new ArrayList<TenderLelang>();
-			
+		if (!onCari) {
 			try {
 				listTenderLelang = service.getAllData();
 			} catch (ClassNotFoundException e) {
@@ -68,8 +62,11 @@ public class TenderLelangBean implements Serializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println("oncari = false");
 		}
-		status = false;
+		else {
+			System.out.println("oncari = true");
+		}
 		return listTenderLelang;
 	}
 	
@@ -218,9 +215,8 @@ public class TenderLelangBean implements Serializable {
 	}
 	
 	public String search() {
-		onSearch = true;
+		onCari = true;
 		listTenderLelang = new ArrayList<TenderLelang>();
-		
 		try {
 			listTenderLelang = service.getManyData(cari);
 		} catch (ClassNotFoundException e) {
@@ -230,6 +226,7 @@ public class TenderLelangBean implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 	
